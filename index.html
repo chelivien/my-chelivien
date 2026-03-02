@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+    overflow:hidden;
+}
+
+/* LOGIN */
+#login{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(#ff4d88,#ff99bb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* AMPLOP */
+#envelope{
+    display:none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#ff4d88;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* CONTENT */
+#content{
+    display:none;
+    padding-top:20px;
+}
+
+/* Polaroid */
+.polaroid{
+    background:white;
+    padding:10px 10px 25px 10px;
+    width:260px;
+    margin:20px auto;
+    box-shadow:0 10px 25px rgba(0,0,0,0.6);
+    border-radius:5px;
+}
+
+.polaroid img{
+    width:100%;
+    border-radius:5px;
+}
+
+.caption{
+    color:#333;
+    margin-top:5px;
+}
+
+/* Button */
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    color:#ff4d88;
+    margin-top:10px;
+}
+
+input{
+    padding:10px;
+    font-size:16px;
+}
+
+/* Hearts */
+.heart{
+    position:fixed;
+    top:-10px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    to{transform:translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- LOGIN -->
+<div id="login">
+<h2>Masukin nama kamu dulu yaa ❤️</h2>
+<input id="namaInput">
+<button onclick="cekNama()">Masuk</button>
+<p id="error"></p>
+</div>
+
+<!-- AMPLOP -->
+<div id="envelope">
+<h1>BUAT MASTER KESAYANGAN AKU 💌</h1>
+<button onclick="bukaSurat()">Buka</button>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
+
+<h1>Hai Sayanggg ❤️</h1>
+
+<p>
+Makasiiii yaaaa sayanggggg udah selalu ada buat aku.<br>
+Maaf ya kalo aku kadang nyebelin.<br><br>
+
+Aku sayang banget sama kamu.<br>
+Semoga kita bisa bareng terus lamaaaa ❤️
+</p>
+
+<div class="polaroid">
+    <img id="slide" src="foto1.jpg">
+    <div class="caption">Kita ❤️</div>
+</div>
+
+</div>
+
+<script>
+// PASSWORD
+function cekNama(){
+    var nama=document.getElementById("namaInput").value.toLowerCase();
+    if(nama==="chelivien"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("envelope").style.display="flex";
+    }else{
+        document.getElementById("error").innerText="Salahh, coba lagi yaa ❤️";
+    }
+}
+
+// BUKA SURAT
+function bukaSurat(){
+    document.getElementById("envelope").style.display="none";
+    document.getElementById("content").style.display="block";
+    document.getElementById("music").play();
+    mulaiHati();
+}
+
+// SLIDE FOTO
+var gambar=["foto1.jpg","foto2.jpg","foto3.jpg"];
+var i=0;
+
+setInterval(function(){
+    i++;
+    if(i>=gambar.length) i=0;
+    document.getElementById("slide").src=gambar[i];
+},2000);
+
+// HATI JATUH
+function mulaiHati(){
+setInterval(function(){
+    var heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(10+Math.random()*20)+"px";
+    heart.style.animationDuration=(3+Math.random()*5)+"s";
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+        heart.remove();
+    },8000);
+},300);
+}
+</script>
+
+</body>
+</html>
