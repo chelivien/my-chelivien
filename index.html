@@ -2,24 +2,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUAT BILAAAA ❤️</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial;
-    background:#111;
-    color:white;
+    font-family:Arial, sans-serif;
     text-align:center;
-    overflow:hidden;
+    overflow-x:hidden;
+    color:white;
+}
+
+/* Background animasi */
+body{
+    background: linear-gradient(-45deg,#ff4d88,#ff99bb,#ff66a3,#ff4d88);
+    background-size:400% 400%;
+    animation:bg 12s infinite;
+}
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
 /* LOGIN */
 #login{
-    position:absolute;
+    position:fixed;
     width:100%;
     height:100%;
-    background:linear-gradient(#ff4d88,#ff99bb);
     display:flex;
     justify-content:center;
     align-items:center;
@@ -29,54 +40,113 @@ body{
 /* AMPLOP */
 #envelope{
     display:none;
-    position:absolute;
+    position:fixed;
     width:100%;
     height:100%;
-    background:#ff4d88;
     justify-content:center;
     align-items:center;
     flex-direction:column;
 }
 
+.envelope{
+    width:220px;
+    height:140px;
+    background:white;
+    position:relative;
+    border-radius:6px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    cursor:pointer;
+    animation:float 2s ease-in-out infinite;
+}
+
+.envelope:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-bottom:70px solid #ff4d88;
+}
+
+/* Float animasi */
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
 /* CONTENT */
 #content{
     display:none;
-    padding-top:20px;
+    padding:20px;
+    animation:fade 2s;
 }
 
-/* Polaroid */
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* Text box */
+.text-box{
+    max-width:500px;
+    margin:auto;
+    background:rgba(255,255,255,0.2);
+    padding:15px;
+    border-radius:15px;
+}
+
+/* Gallery */
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+}
+
 .polaroid{
     background:white;
-    padding:10px 10px 25px 10px;
-    width:260px;
-    margin:20px auto;
-    box-shadow:0 10px 25px rgba(0,0,0,0.6);
+    padding:8px 8px 20px 8px;
+    width:140px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
     border-radius:5px;
+    transform:rotate(calc(-3deg + 6deg * var(--r)));
 }
 
 .polaroid img{
     width:100%;
-    border-radius:5px;
+    border-radius:4px;
 }
 
 .caption{
     color:#333;
-    margin-top:5px;
+    font-size:12px;
+    margin-top:4px;
 }
 
-/* Button */
-button{
-    padding:12px 25px;
-    font-size:18px;
-    border:none;
-    border-radius:10px;
-    background:white;
-    color:#ff4d88;
+/* Cute character */
+.cute{
+    font-size:40px;
     margin-top:10px;
+    animation:float 3s infinite;
 }
 
+/* Input & button */
 input{
     padding:10px;
+    font-size:16px;
+    border-radius:8px;
+    border:none;
+}
+
+button{
+    padding:10px 20px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:#ff4d88;
     font-size:16px;
 }
 
@@ -109,8 +179,8 @@ input{
 
 <!-- AMPLOP -->
 <div id="envelope">
-<h1>BUAT MASTER KESAYANGAN AKU 💌</h1>
-<button onclick="bukaSurat()">Buka</button>
+<h3>Klik amplopnya yaa 💌</h3>
+<div class="envelope" onclick="bukaSurat()"></div>
 </div>
 
 <!-- CONTENT -->
@@ -118,34 +188,38 @@ input{
 
 <h1>Hai Sayanggg ❤️</h1>
 
-<p>
+<div class="text-box">
 Makasiiii yaaaa sayanggggg udah selalu ada buat aku.<br>
 Maaf ya kalo aku kadang nyebelin.<br><br>
-
 Aku sayang banget sama kamu.<br>
-Semoga kita bisa bareng terus lamaaaa ❤️
-</p>
+Semoga kita bareng terus lamaaaa ❤️
+</div>
 
-<div class="polaroid">
-    <img id="slide" src="foto1.jpg">
-    <div class="caption">Kita ❤️</div>
+<div class="cute">☁️🐰☁️</div>
+
+<div class="gallery">
+<div class="polaroid" style="--r:0;"><img src="foto1.jpg"><div class="caption">Memory</div></div>
+<div class="polaroid" style="--r:1;"><img src="foto2.jpg"><div class="caption">Us</div></div>
+<div class="polaroid" style="--r:0.5;"><img src="foto3.jpg"><div class="caption">Love</div></div>
+<div class="polaroid" style="--r:0.8;"><img src="foto4.jpg"><div class="caption">Together</div></div>
+<div class="polaroid" style="--r:0.2;"><img src="foto5.jpg"><div class="caption">Forever</div></div>
 </div>
 
 </div>
 
 <script>
-// PASSWORD
+// Password
 function cekNama(){
     var nama=document.getElementById("namaInput").value.toLowerCase();
     if(nama==="chelivien"){
         document.getElementById("login").style.display="none";
         document.getElementById("envelope").style.display="flex";
     }else{
-        document.getElementById("error").innerText="Salahh, coba lagi yaa ❤️";
+        document.getElementById("error").innerText="Salah yaa, coba lagi ❤️";
     }
 }
 
-// BUKA SURAT
+// Buka surat
 function bukaSurat(){
     document.getElementById("envelope").style.display="none";
     document.getElementById("content").style.display="block";
@@ -153,17 +227,7 @@ function bukaSurat(){
     mulaiHati();
 }
 
-// SLIDE FOTO
-var gambar=["foto1.jpg","foto2.jpg","foto3.jpg"];
-var i=0;
-
-setInterval(function(){
-    i++;
-    if(i>=gambar.length) i=0;
-    document.getElementById("slide").src=gambar[i];
-},2000);
-
-// HATI JATUH
+// Hati jatuh
 function mulaiHati(){
 setInterval(function(){
     var heart=document.createElement("div");
